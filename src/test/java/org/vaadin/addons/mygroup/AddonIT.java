@@ -1,31 +1,44 @@
 package org.vaadin.addons.mygroup;
 
-import com.vaadin.flow.component.button.testbench.ButtonElement;
-import com.vaadin.flow.component.html.testbench.DivElement;
-import com.vaadin.flow.component.html.testbench.ParagraphElement;
-import org.junit.Assert;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.BoundingBox;
+import org.junit.jupiter.api.Test;
 
-public class AddonIT extends AbstractViewTest {
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+public class AddonIT {
+
+    static Playwright playwright = Playwright.create(); // <4>
+    @Test
+    public void testClicking() {
+    }
+
 
     @Test
     public void addonTextIsRendered() {
-        $(ButtonElement.class).first().click();
+        Browser browser = playwright.chromium().launch(); // <5>
+        Page page = browser.newPage();
+        page.navigate("http://localhost:" + 8080 + "/");
+        page.getByText("Show value").click();
 
-        String hex = $(ParagraphElement.class).first().getText();
-        Assert.assertEquals("#ff0d00", hex);
+        final String originalValue ="#ff0d00";
 
-        WebElement element = getDriver().findElement(By.tagName("react-color-picker"));
-        new Actions(getDriver()).moveToElement(element).moveByOffset(20, 20).click().perform();
+        assertThat(page.locator("//p")).containsText(originalValue); // <8>
 
+        BoundingBox boundingBox = page.locator("//react-color-picker").boundingBox();
 
-        hex = $(ParagraphElement.class).first().getText();
-        Assert.assertEquals("#ff0d00", hex);
+        var x = boundingBox.x + boundingBox.width/2;
+        var y  = boundingBox.y + boundingBox.height/2;
 
+        // click in the middle and see that the value changes
+        page.mouse().click(x, y);
+
+        page.getByText("Show value").click();
+
+        assertThat(page.locator("//p")).not().containsText(originalValue);
 
     }
 }

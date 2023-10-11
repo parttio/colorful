@@ -1,17 +1,21 @@
-# Vaadin Add-on example project
+# Colorful - Vaadin React Add-on example project
 
-An empty project for creating a Vaadin add-on. You should start from this project if your add-on's components are based on the existing Vaadin classes or doesn't use 3rd party JavaScript modules.
+This is an add-on example that use React. It creates a trivial Java API (without any proper typing or field interfaces) around [a React component](https://github.com/omgovich/react-colorful) that is essentially a color picker.
 
-## Add-on architecture
-![server-side-addon](https://user-images.githubusercontent.com/991105/211870086-75544597-847d-4d21-82fa-341411753558.svg)
+As discussed earlier for example in [Building Java API for JavaScript libraries - The lightweight approach](https://vaadin.com/blog/building-java-api-for-javascript-libraries), Vaadin by no means requires a Web Component as a counterpart for a Java Component implementation. Here we use a JS component that uses React.
 
-## Alternative add-on templates
+Integration is fairly similar to any other JS component. The special thing with React is JSX (or its TypeScript counterpart TSX). 
 
-If you wish to build and publish an add-on or extension in [Vaadin Directory](https://vaadin.com/directory), Vaadin provides the following three template projects:
- 1. **(this repo)** [vaadin/addon-template](https://github.com/vaadin/addon-template): Create a composite component. This Java-only template is the easiest when extending Vaadin Java components.
- 2. [vaadin/client-server-addon-template](https://github.com/vaadin/client-server-addon-template): Build a standalone, client-server TypeScript-Java component. This template provides you with a [Lit-based](https://github.com/lit/lit/) example to start with.
- 3. [vaadin/npm-addon-template](https://github.com/vaadin/npm-addon-template): Wrap a web component from [npmjs.com](https://npmjs.com/) as a Vaadin Java component.
+I actually generated my first draft of the integration without JSX, as that is possible and as the integration part with Vaadin is tiny. JSX/TSX is not really needed that much as this is creating a wrapper.
 
+As I figured out that Vite (the front-end build tooling used by Vaadin) supports JSX out of the box, I then tried renaming the .js file into .jsx, changed programmatic usage into JSX and to my surprise all worked, *until* I actually tried the packaged add-on in an application project. When trying to create a PR to Vaadin to support .jsx files in add-ons, I noticed from the sources that .tsx files *ARE already* supported. And as TS is JS, I just renamed the file to .tsx and now all works, even if you want to do some customisation or mashups with JSX 😎
+
+To repeat the essential finding: use .tsx as file name postfix now, even if you wouldn't use TS, when building a re-usable add-on. And in my philosophy, you always should do that. If you plan to embed some React component only within your application project, .jsx works there fine as well.
+
+A PR to make also .jsx supported: https://github.com/vaadin/flow/pull/17820
+
+Currently not published to Maven/Directory, as this is 
+more of an integration example, instead of an add-on, but make an issue about publishing if you'd find this useful as an actual add-on.
 
 ## Development instructions
 
@@ -33,30 +37,9 @@ This deploys demo at http://localhost:8080
  
 ### Integration test
 
-To run Integration Tests, execute `mvn verify -Pit,production`.
+To run Integration Tests, execute `mvn verify -Pit`.
 
 Tests run by default in `headless` mode, to avoid browser windows to be opened for every test.
 This behaviour is always disabled when running the tests in debug mode in the IDE
 or when running maven with the `-Dmaven.failsafe.debug` sytem property.
 On normal execution, headless mode can be deactivated using the `-Dtest.headless=false` system property.
-
-## Publishing to Vaadin Directory
-
-You should change the `organization.name` property in `pom.xml` to your own name/organization.
-
-```
-    <organization>
-        <name>###author###</name>
-    </organization>
-```
-
-You can create the zip package needed for [Vaadin Directory](https://vaadin.com/directory/) using
-
-```
-mvn versions:set -DnewVersion=1.0.0 # You cannot publish snapshot versions 
-mvn clean package -Pdirectory
-```
-
-The package is created as `target/{project-name}-1.0.0.zip`
-
-For more information or to upload the package, visit https://vaadin.com/directory/my-components?uploadNewComponent

@@ -20,9 +20,8 @@ more of an integration example, instead of an add-on, but make an issue about pu
 ## Development instructions
 
 ### Important Files 
-* TheAddon.java: this is the addon-on component class. You can add more classes if you wish, including other Components.
-* TestView.java: A View class that let's you test the component you are building. This and other classes in the test folder will not be packaged during the build. You can add more test view classes in this package.
-* assembly/: this folder includes configuration for packaging the project into a JAR so that it works well with other Vaadin projects and the Vaadin Directory. There is usually no need to modify these files, unless you need to add JAR manifest entries.
+* HexColorPicker.java: this is the addon-on component class. This provides the Java API for Vaadin developers to use.
+* hexcolorpicker-connector.tsx: The tiny glue of JS that renders the React component into the client-side counterpart element fo the HexColorPicker.java
 
 If you are using static resources such as images, JS (e.g. templates) and CSS files the correct location for them is under the `/src/main/resources/META-INF/resources/frontend` directory and is described here [Resource Cheat Sheet](https://vaadin.com/docs/v14/flow/importing-dependencies/tutorial-ways-of-importing.html#resource-cheat-sheet)in more details. 
 

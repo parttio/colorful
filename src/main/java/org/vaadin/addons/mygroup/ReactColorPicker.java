@@ -8,7 +8,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @NpmPackage(value = "react", version = "18.2.0")
 @NpmPackage(value = "react-dom", version = "18.2.0")
 @NpmPackage(value = "react-colorful", version = "5.6.1")
-@JsModule("./rcp-connector.js")
+@JsModule("./rcp-connector.jsx")
 @Tag("react-color-picker")
 public class ReactColorPicker extends Component {
 

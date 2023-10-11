@@ -28,7 +28,7 @@ public class AddonIT {
 
         assertThat(page.locator("//p")).containsText(originalValue); // <8>
 
-        BoundingBox boundingBox = page.locator("//react-color-picker").boundingBox();
+        BoundingBox boundingBox = page.locator("//hex-color-picker").boundingBox();
 
         var x = boundingBox.x + boundingBox.width/2;
         var y  = boundingBox.y + boundingBox.height/2;

@@ -1,7 +1,6 @@
 package org.vaadin.addons.mygroup;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -10,7 +9,7 @@ import com.vaadin.flow.router.Route;
 public class AddonView extends VerticalLayout {
 
     public AddonView() {
-        var colorPicker = new ReactColorPicker();
+        var colorPicker = new HexColorPicker();
         add(colorPicker);
         var p = new Paragraph();
         p.getStyle().setFont("bold 30px sans-serif");

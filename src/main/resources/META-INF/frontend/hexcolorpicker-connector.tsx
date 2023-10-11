@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HexColorPicker } from "react-colorful";
 
-window.rcpConnectorInit = (element, initialValue)  => {
+window.hexcolorpickerConnectorInit = (element, initialValue)  => {
     const root = createRoot(element);
     var setColor = (hex) => {
         // fire a custom event that is listened by the

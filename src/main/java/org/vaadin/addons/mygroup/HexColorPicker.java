@@ -29,4 +29,9 @@ public class HexColorPicker extends Component {
     public String getValue() {
         return value;
     }
+
+    public void setValue(String value) {
+        this.value = value;
+        getElement().executeJs(("this._c.setValue('%s')").formatted(value));
+    }
 }

@@ -1,4 +1,4 @@
-package org.vaadin.addons.mygroup;
+package org.vaadin.addons.parttio.colorful;
 
 
 import com.microsoft.playwright.Browser;

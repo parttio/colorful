@@ -1,6 +1,6 @@
-package org.vaadin.addons.mygroup;
+package org.vaadin.addons.parttio.colorful;
 
-import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
@@ -10,28 +10,24 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @NpmPackage(value = "react-colorful", version = "5.6.1")
 @JsModule("./hexcolorpicker-connector.tsx")
 @Tag("hex-color-picker") // The root element could be div, but why not give it a more descriptive name, even if it isn't an actual web component...
-public class HexColorPicker extends Component {
-
-    private String value = "#ff0d00";
+public class HexColorPicker extends AbstractField<HexColorPicker, String> {
 
     public HexColorPicker() {
+        super("#ff0d00");
         // call init method from hexcolorpicker-connector.tsx
         // that renders the React component to this element
-        getElement().executeJs("window.hexcolorpickerConnectorInit($0, $1)", getElement(), value);
+        getElement().executeJs("window.hexcolorpickerConnectorInit($0, $1)", getElement(), getValue());
         // start listening events that push data from the event listener
         getElement().addEventListener("color-change", e -> {
-                    this.value = e.getEventData().getString("event.hex");
+                    var newValue = e.getEventData().getString("event.hex");
+                    setModelValue(newValue, true);
                 })
                 .addEventData("event.hex")
                 .debounce(1000); // limit events sent to server, if e.g. the poing in the "colormap" is being dragged
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-        getElement().executeJs(("this._c.setValue('%s')").formatted(value));
+    @Override
+    protected void setPresentationValue(String newPresentationValue) {
+        getElement().executeJs(("this._c.setValue('%s')").formatted(getValue()));
     }
 }

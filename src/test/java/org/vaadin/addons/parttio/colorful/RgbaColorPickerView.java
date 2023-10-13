@@ -1,27 +1,31 @@
-package org.vaadin.addons.mygroup;
+package org.vaadin.addons.parttio.colorful;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route
-public class HexColorPickerView extends VerticalLayout {
+public class RgbaColorPickerView extends VerticalLayout {
 
     public class ColorValueDisplay  extends Paragraph {
         public ColorValueDisplay() {
             getStyle().setFont("bold 30px sans-serif");
         }
 
-        public void setColor(String hex) {
-            setText(hex);
-            getStyle().setColor(hex);
+        public void setColor(RgbaColor color) {
+            setText(color.toString());
+            getStyle().setColor(color.toCssColor());
         }
     }
 
-    public HexColorPickerView() {
-        var colorPicker = new HexColorPicker();
+    public RgbaColorPickerView() {
+        var colorPicker = new RgbaColorPicker();
+        colorPicker.addValueChangeListener(e -> {
+            Notification.show("Value now: " + e.getValue().toCssColor());
+        });
         add(colorPicker);
         var p = new ColorValueDisplay();
         add(p);
@@ -30,23 +34,10 @@ public class HexColorPickerView extends VerticalLayout {
                     p.setColor(colorPicker.getValue());
                 }),
                 new Button("Make green", e -> {
-                    colorPicker.setValue("#00ff00");
+                    colorPicker.setValue(new RgbaColor(0,255,0, 0.8));
                 })
             )
         );
 
-        var another = new HexColorPicker();
-        add(another);
-        var p2 = new ColorValueDisplay();
-        add(p2);
-        add(new HorizontalLayout(
-                new Button("Show value", e -> {
-                    p2.setColor(colorPicker.getValue());
-                }),
-                new Button("Make green", e -> {
-                    another.setValue("#00ff00");
-                })
-            )
-        );
     }
 }

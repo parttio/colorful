@@ -1,4 +1,4 @@
-package org.vaadin.addons.mygroup;
+package org.vaadin.addons.parttio.colorful;
 
 // { r: 200, g: 150, b: 35, a: 0.5 }
 record RgbaColor(int r, int g, int b, double a) {

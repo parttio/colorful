@@ -4,7 +4,7 @@
 
     <groupId>org.parttio</groupId>
     <artifactId>colorful</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>Colorful</name>
     <description>Vaadin Java API for Colorful React color picker component</description>
     <url>https://github.com/parttio/colorful</url>
@@ -36,7 +36,7 @@
         <url>https://github.com/parttio/colorful</url>
         <connection>scm:git:git://github.com/parttio/colorful.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:/parttio/colorful.git</developerConnection>
-        <tag>colorful-1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>

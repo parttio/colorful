@@ -9,16 +9,25 @@ import com.vaadin.flow.router.Route;
 @Route("")
 public class AddonView extends VerticalLayout {
 
+    public class ColorValueDisplay  extends Paragraph {
+        public ColorValueDisplay() {
+            getStyle().setFont("bold 30px sans-serif");
+        }
+
+        public void setColor(String hex) {
+            setText(hex);
+            getStyle().setColor(hex);
+        }
+    }
+
     public AddonView() {
         var colorPicker = new HexColorPicker();
         add(colorPicker);
-        var p = new Paragraph();
-        p.getStyle().setFont("bold 30px sans-serif");
+        var p = new ColorValueDisplay();
         add(p);
         add(new HorizontalLayout(
                 new Button("Show value", e -> {
-                    p.setText(colorPicker.getValue());
-                    p.getStyle().setColor(colorPicker.getValue());
+                    p.setColor(colorPicker.getValue());
                 }),
                 new Button("Make green", e -> {
                     colorPicker.setValue("#00ff00");
@@ -26,16 +35,18 @@ public class AddonView extends VerticalLayout {
             )
         );
 
-
         var another = new HexColorPicker();
         add(another);
-        var p2 = new Paragraph();
-        p2.getStyle().setFont("bold 30px sans-serif");
+        var p2 = new ColorValueDisplay();
         add(p2);
-        add(new Button("Show value", e -> {
-            p2.setText(another.getValue());
-            p2.getStyle().setColor(another.getValue());
-        }));
-
+        add(new HorizontalLayout(
+                new Button("Show value", e -> {
+                    p2.setColor(colorPicker.getValue());
+                }),
+                new Button("Make green", e -> {
+                    another.setValue("#00ff00");
+                })
+            )
+        );
     }
 }

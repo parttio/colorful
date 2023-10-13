@@ -7,7 +7,7 @@ window.hexcolorpickerConnectorInit = (element, initialValue)  => {
 
     // to use useState, need a React component
     const Wrapper = () => {
-      const [color, setColor] = useState(initialValue);
+        const [color, setColor] = useState(initialValue);
 
         const onChange = (hex) => {
             // maintain the state as using useState
@@ -20,13 +20,12 @@ window.hexcolorpickerConnectorInit = (element, initialValue)  => {
             event.hex = hex;
             element.dispatchEvent(event);
         };
+        element._c = {};
+        // this is called by the server if value changed in the JVM side
+        // triggers re-render as using useState
+        element._c.setValue = newValue => setColor(newValue);
 
-      element._c = {};
-      // this is called by the server if value changed in the JVM side
-      // triggers re-render as using useState
-      element._c.setValue = newValue => setColor(newValue);
-
-      return <HexColorPicker color={color} onChange={onChange} />;
+        return <HexColorPicker color={color} onChange={onChange} />;
     };
     root.render(<Wrapper/>);
 

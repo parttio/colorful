@@ -254,9 +254,9 @@
     "@vaadin/overlay": "$@vaadin/overlay",
     "@vaadin/a11y-base": "$@vaadin/a11y-base",
     "@vaadin/side-nav": "$@vaadin/side-nav",
-    "mobile-drag-drop": "$mobile-drag-drop",
     "react-dom": "$react-dom",
     "react": "$react",
-    "react-colorful": "$react-colorful"
+    "react-colorful": "$react-colorful",
+    "mobile-drag-drop": "$mobile-drag-drop"
   }
 }

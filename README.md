@@ -14,16 +14,14 @@ To repeat the essential finding: use .tsx as file name postfix now, even if you 
 
 A PR to make also .jsx supported: https://github.com/vaadin/flow/pull/17820
 
-Currently not published to Maven/Directory, as this is 
-more of an integration example, instead of an add-on, but make an issue about publishing if you'd find this useful as an actual add-on.
+The add-on is also available as a pre-built for actual usage via [Vaadin Directory](https://vaadin.com/directory/).
 
 ## Development instructions
 
 ### Important Files 
 * HexColorPicker.java: this is the addon-on component class. This provides the Java API for Vaadin developers to use.
 * hexcolorpicker-connector.tsx: The tiny glue of JS that renders the React component into the client-side counterpart element fo the HexColorPicker.java
-
-If you are using static resources such as images, JS (e.g. templates) and CSS files the correct location for them is under the `/src/main/resources/META-INF/resources/frontend` directory and is described here [Resource Cheat Sheet](https://vaadin.com/docs/v14/flow/importing-dependencies/tutorial-ways-of-importing.html#resource-cheat-sheet)in more details. 
+* RgbaColorPicker.java & friends: The slightly different picker with a typed value on the Java API
 
 ### Deployment
 
@@ -36,9 +34,6 @@ This deploys demo at http://localhost:8080
  
 ### Integration test
 
-To run Integration Tests, execute `mvn verify -Pit`.
+If you have the development server running, you can run the AddonIT test directly from IDE.
 
-Tests run by default in `headless` mode, to avoid browser windows to be opened for every test.
-This behaviour is always disabled when running the tests in debug mode in the IDE
-or when running maven with the `-Dmaven.failsafe.debug` sytem property.
-On normal execution, headless mode can be deactivated using the `-Dtest.headless=false` system property.
+From CLI, 8080 port must be free and then execute `mvn verify -Pit`.

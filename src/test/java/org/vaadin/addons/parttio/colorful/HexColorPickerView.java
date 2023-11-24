@@ -14,9 +14,9 @@ public class HexColorPickerView extends VerticalLayout {
             getStyle().setFont("bold 30px sans-serif");
         }
 
-        public void setColor(String hex) {
-            setText(hex);
-            getStyle().setColor(hex);
+        public void setColor(RgbaColor color) {
+            setText(color.toWebHex());
+            getStyle().setColor(color.toWebHex());
         }
     }
 

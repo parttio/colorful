@@ -41,7 +41,7 @@ public class HexColorPickerView extends VerticalLayout {
         add(p2);
         add(new HorizontalLayout(
                 new Button("Show value", e -> {
-                    p2.setColor(colorPicker.getValue());
+                    p2.setColor(another.getValue());
                 }),
                 new Button("Make green", e -> {
                     another.setValue("#00ff00");

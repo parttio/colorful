@@ -28,6 +28,6 @@ public class HexColorPicker extends AbstractField<HexColorPicker, String> {
 
     @Override
     protected void setPresentationValue(String newPresentationValue) {
-        getElement().executeJs(("this._c.setValue('%s')").formatted(getValue()));
+        getElement().executeJs(("this._c.setValue($0)"),newPresentationValue);
     }
 }

@@ -5,6 +5,8 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import in.virit.color.HexColor;
+import in.virit.color.RgbColor;
 
 @Route
 public class HexColorPickerView extends VerticalLayout {
@@ -14,9 +16,9 @@ public class HexColorPickerView extends VerticalLayout {
             getStyle().setFont("bold 30px sans-serif");
         }
 
-        public void setColor(RgbaColor color) {
-            setText(color.toWebHex());
-            getStyle().setColor(color.toWebHex());
+        public void setColor(HexColor color) {
+            setText(color.toString());
+            getStyle().setColor(color.toString());
         }
     }
 
@@ -30,7 +32,7 @@ public class HexColorPickerView extends VerticalLayout {
                     p.setColor(colorPicker.getValue());
                 }),
                 new Button("Make green", e -> {
-                    colorPicker.setValue("#00ff00");
+                    colorPicker.setValue(HexColor.of("#00ff00"));
                 })
             )
         );
@@ -44,7 +46,7 @@ public class HexColorPickerView extends VerticalLayout {
                     p2.setColor(another.getValue());
                 }),
                 new Button("Make green", e -> {
-                    another.setValue("#00ff00");
+                    another.setValue(HexColor.of("#00ff00"));
                 })
             )
         );

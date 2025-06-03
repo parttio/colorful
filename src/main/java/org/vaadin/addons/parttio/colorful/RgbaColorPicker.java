@@ -7,6 +7,7 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.internal.StateTree;
 import elemental.json.JsonObject;
+import in.virit.color.Color;
 import in.virit.color.NamedColor;
 import in.virit.color.RgbColor;
 
@@ -14,11 +15,11 @@ import in.virit.color.RgbColor;
 @NpmPackage(value = "react-dom", version = "18.2.0")
 @NpmPackage(value = "react-colorful", version = "5.6.1")
 @JsModule("./rgbacolorpicker-connector.tsx")
-public class RgbaColorPicker extends CustomField<RgbColor> {
+public class RgbaColorPicker extends CustomField<Color> {
 
     private static RgbColor DEFAULT_COLOR = NamedColor.BLACK.toRgbColor();
 
-    private RgbColor newValue = DEFAULT_COLOR;
+    private Color newValue = DEFAULT_COLOR;
     boolean clientSideInitialized = false;
     private StateTree.ExecutionRegistration initReg;
 
@@ -62,12 +63,12 @@ public class RgbaColorPicker extends CustomField<RgbColor> {
     }
 
     @Override
-    protected RgbColor generateModelValue() {
+    protected Color generateModelValue() {
         return newValue;
     }
 
     @Override
-    protected void setPresentationValue(RgbColor newPresentationValue) {
+    protected void setPresentationValue(Color newPresentationValue) {
         newValue = newPresentationValue;
         if(newPresentationValue == null) {
             return;
@@ -82,12 +83,13 @@ public class RgbaColorPicker extends CustomField<RgbColor> {
         }
     }
 
-    private static String rgbaJson(RgbColor newPresentationValue) {
+    private static String rgbaJson(Color newPresentationValue) {
+        RgbColor rgbColor = newPresentationValue.toRgbColor();
         String json = "{ r: %s, g: %s, b: %s, a: %s }".formatted(
-                newPresentationValue.r(),
-                newPresentationValue.g(),
-                newPresentationValue.b(),
-                newPresentationValue.a()+"");
+                rgbColor.r(),
+                rgbColor.g(),
+                rgbColor.b(),
+                rgbColor.a()+"");
         return json;
     }
 }

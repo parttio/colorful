@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.Route;
+import in.virit.color.Color;
 import in.virit.color.NamedColor;
 import in.virit.color.RgbColor;
 
@@ -28,7 +29,7 @@ public class RgbaColorPickerView extends VerticalLayout implements AfterNavigati
             getStyle().setFont("bold 30px sans-serif");
         }
 
-        public void setColor(RgbColor color) {
+        public void setColor(Color color) {
             setText(color.toString());
             getStyle().setColor(color.toString());
         }

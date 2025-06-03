@@ -6,7 +6,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import in.virit.color.HexColor;
-import in.virit.color.RgbColor;
 
 @Route
 public class HexColorPickerView extends VerticalLayout {
@@ -24,6 +23,7 @@ public class HexColorPickerView extends VerticalLayout {
 
     public HexColorPickerView() {
         var colorPicker = new HexColorPicker();
+        colorPicker.setValue(HexColor.of("#ff0d00"));
         add(colorPicker);
         var p = new ColorValueDisplay();
         add(p);
@@ -38,6 +38,7 @@ public class HexColorPickerView extends VerticalLayout {
         );
 
         var another = new HexColorPicker();
+        another.setValue(HexColor.of("#ff0d00"));
         add(another);
         var p2 = new ColorValueDisplay();
         add(p2);

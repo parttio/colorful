@@ -59,6 +59,11 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>flow-server</artifactId>
+            <version>25.0.eventdetail-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <!-- Consider limiting the dependencies to flow-server only something, but for most end users depending on vaadin-core is ok -->
             <artifactId>vaadin-core</artifactId>
         </dependency>

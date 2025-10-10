@@ -46,8 +46,8 @@ public class RgbaColorPicker extends CustomField<Color> {
             // that renders the React component to this element
             getElement().executeJs("window.rgbacolorpickerConnectorInit($0, $1)", getElement(), newValue);
             // start listening events that push data from the event listener
-            getElement().addEventListener("color-change", e -> {
-                        RgbColor newValue = e.getEventDetail(RgbColor.class);
+            getElement().addEventListener("color-change", RgbColor.class, e -> {
+                        RgbColor newValue = e.getDetail();
                         setModelValue(newValue, true);
                     })
                     .debounce(200); // limit events sent to server, if e.g. the poing in the "colormap" is being dragged

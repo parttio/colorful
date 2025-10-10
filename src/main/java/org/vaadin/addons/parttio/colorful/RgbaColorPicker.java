@@ -1,5 +1,6 @@
 package org.vaadin.addons.parttio.colorful;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.customfield.CustomField;
@@ -43,17 +44,11 @@ public class RgbaColorPicker extends CustomField<Color> {
         initReg = attachEvent.getUI().beforeClientResponse(this, context -> {
             // call init method from rgbacolorpicker-connector.tsx
             // that renders the React component to this element
-            getElement().executeJs("window.rgbacolorpickerConnectorInit($0, %s)".formatted(rgbaJson(newValue)), getElement());
+            getElement().executeJs("window.rgbacolorpickerConnectorInit($0, $1)", getElement(), newValue);
             // start listening events that push data from the event listener
+            record RgbaEventData(@JsonProperty("event.rgba") RgbColor rgba) {}
             getElement().addEventListener("color-change", e -> {
-                        var json = e.getEventData().get("event.rgba");
-                        var newValue = new RgbColor(
-                                json.get("r").asInt(),
-                                json.get("g").asInt(),
-                                json.get("b").asInt(),
-                                json.get("a").asDouble()
-                        );
-
+                        RgbColor newValue = e.getEventData(RgbaEventData.class).rgba();
                         setModelValue(newValue, true);
                     })
                     .addEventData("event.rgba")
@@ -70,26 +65,16 @@ public class RgbaColorPicker extends CustomField<Color> {
     @Override
     protected void setPresentationValue(Color newPresentationValue) {
         newValue = newPresentationValue;
+        // Because of things, we must use setTimeout
+
         if(newPresentationValue == null) {
             return;
         }
         if(clientSideInitialized) {
-            // Updating an existing picker, set with JS
-            String json = rgbaJson(newPresentationValue);
-            // Because of things, we must use setTimeout
-            getElement().executeJs("const el = this; setTimeout(() => el._c.setValue(%s), 50)".formatted(json));
+            getElement().executeJs("const el = this; setTimeout(() => el._c.setValue($0), 50)", newPresentationValue);
         } else {
             // NOOP, new color will be set during initialization, see onAttach
         }
     }
 
-    private static String rgbaJson(Color newPresentationValue) {
-        RgbColor rgbColor = newPresentationValue.toRgbColor();
-        String json = "{ r: %s, g: %s, b: %s, a: %s }".formatted(
-                rgbColor.r(),
-                rgbColor.g(),
-                rgbColor.b(),
-                rgbColor.a()+"");
-        return json;
-    }
 }

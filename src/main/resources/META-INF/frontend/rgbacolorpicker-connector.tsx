@@ -16,8 +16,7 @@ window.rgbacolorpickerConnectorInit = (element, initialValue)  => {
             // actual Java component. Could also just use
             // element.$server.myClientCallableMethod, but debouncing
             // is supported when using events
-            const event = new Event("color-change");
-            event.rgba = rgba;
+            const event = new CustomEvent("color-change", {detail: rgba});
             element.dispatchEvent(event);
         };
         element._c = {};

@@ -46,12 +46,12 @@ public class RgbaColorPicker extends CustomField<Color> {
             getElement().executeJs("window.rgbacolorpickerConnectorInit($0, %s)".formatted(rgbaJson(newValue)), getElement());
             // start listening events that push data from the event listener
             getElement().addEventListener("color-change", e -> {
-                        JsonObject json = e.getEventData().getObject("event.rgba");
+                        var json = e.getEventData().get("event.rgba");
                         var newValue = new RgbColor(
-                                (int) json.getNumber("r"),
-                                (int) json.getNumber("g"),
-                                (int) json.getNumber("b"),
-                                json.getNumber("a")
+                                json.get("r").asInt(),
+                                json.get("g").asInt(),
+                                json.get("b").asInt(),
+                                json.get("a").asDouble()
                         );
 
                         setModelValue(newValue, true);

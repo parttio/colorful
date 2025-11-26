@@ -1,13 +1,11 @@
 package org.vaadin.addons.parttio.colorful;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.internal.StateTree;
-import elemental.json.JsonObject;
 import in.virit.color.Color;
 import in.virit.color.NamedColor;
 import in.virit.color.RgbColor;
@@ -46,11 +44,11 @@ public class RgbaColorPicker extends CustomField<Color> {
             // that renders the React component to this element
             getElement().executeJs("window.rgbacolorpickerConnectorInit($0, $1)", getElement(), newValue);
             // start listening events that push data from the event listener
-            getElement().addEventListener("color-change", RgbColor.class, e -> {
-                        RgbColor newValue = e.getDetail();
+            getElement().addEventListener("color-change", e -> {
+                        RgbColor newValue = e.getEventDetail(RgbColor.class);
                         setModelValue(newValue, true);
-                    })
-                    .debounce(200); // limit events sent to server, if e.g. the poing in the "colormap" is being dragged
+                    }).addEventDetail()
+                        .debounce(200); // limit events sent to server, if e.g. the poing in the "colormap" is being dragged
             clientSideInitialized = true;
         });
     }

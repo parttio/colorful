@@ -41,7 +41,7 @@ public class HexColorPicker extends CustomField<HexColor> {
             getElement().executeJs("window.hexcolorpickerConnectorInit($0, $1)", getElement(), newValue.toString());
             // start listening events that push data from the event listener
             getElement().addEventListener("color-change", e -> {
-                        var newValue = e.getEventData().get("event.hex").toString();
+                        var newValue = e.getEventData().get("event.hex").stringValue();
                         setModelValue(HexColor.of(newValue), true);
                     })
                     .addEventData("event.hex")

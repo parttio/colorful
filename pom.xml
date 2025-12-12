@@ -10,9 +10,9 @@
     <url>https://github.com/parttio/colorful</url>
 
     <properties>
-        <vaadin.version>25.0.0-beta7</vaadin.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <vaadin.version>25.0.0-rc1</vaadin.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>in.virit</groupId>
             <artifactId>color</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>in.virit</groupId>
             <artifactId>mopo</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.6</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

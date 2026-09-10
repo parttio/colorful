@@ -10,8 +10,6 @@ import in.virit.color.Color;
 import in.virit.color.NamedColor;
 import in.virit.color.RgbColor;
 
-@NpmPackage(value = "react", version = "18.2.0")
-@NpmPackage(value = "react-dom", version = "18.2.0")
 @NpmPackage(value = "react-colorful", version = "5.6.1")
 @JsModule("./rgbacolorpicker-connector.tsx")
 public class RgbaColorPicker extends CustomField<Color> {

@@ -9,7 +9,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.internal.StateTree;
 import in.virit.color.HexColor;
 
-@NpmPackage(value = "react-colorful", version = "5.6.1")
+@NpmPackage(value = "react-colorful", version = "5.8.1")
 @JsModule("./hexcolorpicker-connector.tsx")
 @Tag("hex-color-picker") // The root element could be div, but why not give it a more descriptive name, even if it isn't an actual web component...
 public class HexColorPicker extends CustomField<HexColor> {
